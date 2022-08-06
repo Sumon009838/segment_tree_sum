@@ -1,16 +1,4 @@
 ll seg[2000000],ar[300002];
-void build(int ind,int low,int high)
-{
-    if(low==high)
-    {
-        seg[ind]=ar[low];
-        return;
-    }
-    int mid=(low+high)/2;
-    build(2*ind,low,mid);
-    build(2*ind+1,mid+1,high);
-    seg[ind]=seg[ind*2]+seg[ind*2+1];
-}
 ll query(ll ind,ll low,ll high,ll l ,ll r)
 {
     if(low>=l&&high<=r)
@@ -41,6 +29,6 @@ void update(ll ind,ll low,ll high,ll node,ll val)
         }
         else
         update(ind*2+1,mid+1,high,node,val);
-        seg[ind]=seg[ind*2+seg[ind*2+1];
+        seg[ind]=seg[ind*2]+seg[ind*2+1];
     }
 }
