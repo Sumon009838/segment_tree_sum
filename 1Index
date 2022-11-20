@@ -1,0 +1,33 @@
+ll query(ll ind,ll low,ll high,ll l ,ll r)
+{
+    if(low>=l&&high<=r)
+    {
+        return seg[ind];
+    }
+    if(high<l||low>r)
+    {
+        return 0;
+    }
+    ll mid=(low+high)/2;
+    ll left=query(ind*2+1,low,mid,l,r);
+    ll right=query(ind*2+2,mid+1,high,l,r);
+    return (left+right);
+}
+void update(ll ind,ll low,ll high,ll node,ll val)
+{
+    if(low==high)
+    {
+        seg[ind]=val;
+    }
+    else
+    {
+        ll mid=(low+high)/2;
+        if(low<=node&&mid>=node)
+        {
+            update(ind*2+1,low,mid,node,val);
+        }
+        else
+        update(ind*2+2,mid+1,high,node,val);
+        seg[ind]=(seg[ind*2+1]+seg[ind*2+2]);
+    }
+}
